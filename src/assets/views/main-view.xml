@@ -1,0 +1,8 @@
+<vbox width="800px" height="600px">
+    <menubar id="topbar" width="100%" height="auto">
+        <menu text="File" id="filedropdown">
+            <menuitem text="New..."  id='new-opt'/>
+            <menuitem text="Open..." id='open-opt'/>
+        </menu>
+    </menubar>
+</vbox>

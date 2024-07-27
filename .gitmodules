@@ -1,0 +1,12 @@
+[submodule ".haxelib/haxeui-core/git"]
+	path = .haxelib/haxeui-core/git
+	url = git@github.com:haxeui/haxeui-core
+[submodule ".haxelib/haxeui-hxwidgets/git"]
+	path = .haxelib/haxeui-hxwidgets/git
+	url = git@github.com:haxeui/haxeui-hxwidgets
+[submodule ".haxelib/hxWidgets/git"]
+	path = .haxelib/hxWidgets/git
+	url = git@github.com:haxeui/hxwidgets
+[submodule ".haxelib/hxcpp/git"]
+	path = .haxelib/hxcpp/git
+	url = git@github.com:haxefoundation/hxcpp

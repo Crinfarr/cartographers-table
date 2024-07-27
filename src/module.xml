@@ -1,0 +1,9 @@
+<module id="core">
+    <resources>
+        <resource path="src/assets/views" prefix="views"/>
+        <resource path="src/assets" prefix="assets"/>
+    </resources>
+    <components>
+        <component package="components"/>
+    </components>
+</module>

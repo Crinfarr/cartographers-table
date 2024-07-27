@@ -1,0 +1,19 @@
+{
+    "haxe.configurations": [
+        {
+            "args": [
+                "compile.hxml",
+                "-cpp bin/dev"
+            ],
+            "label": "Dev"
+        },
+        {
+            "args": [
+                "compile.hxml",
+                "-cpp bin/prod",
+                "-D no-traces"
+            ],
+            "label": "Prod"
+        }
+    ]
+}
