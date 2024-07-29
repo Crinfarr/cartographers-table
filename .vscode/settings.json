@@ -14,6 +14,18 @@
                 "-D no-traces"
             ],
             "label": "Prod"
+        },
+        {
+            "args": [
+                "--interp",
+                "-cp src",
+                "--main Test",
+                "-D test_jar_reader"
+            ],
+            "files": [
+                "src/Test"
+            ],
+            "label": "Module tests"
         }
     ]
 }
