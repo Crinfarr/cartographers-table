@@ -10,3 +10,6 @@
 [submodule ".haxelib/hxcpp/git"]
 	path = .haxelib/hxcpp/git
 	url = git@github.com:haxefoundation/hxcpp
+[submodule "mod"]
+	path = mod
+	url = git@github.com:crinfarr/cartographers-mod
