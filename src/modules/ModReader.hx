@@ -14,7 +14,7 @@ class ModReader extends Reader {
 
 	public function new(path:String) {
         super(File.read(path));
-        this.entries.filter((e) -> e.fileName == "META_INF/mods.toml")
+        this.entries.filter((e) -> e.fileName == "META_INF/mods.toml");
         for (entry in this.entries) {
 			if (~/(?<=\/textures\/).+(\.json|\.png)/gm.match(entry.fileName)) {
                 
@@ -26,10 +26,10 @@ class ModReader extends Reader {
                 
                 if (~/\.json$/gm.match(entry.fileName)) {
                     //FIXME: 3d item portraits
-                    texRegistry.get(texType).set()
+                    // texRegistry.get(texType).set()
                 }
                 else {
-                    texRegistry.get(texType).set()
+                    // texRegistry.get(texType).set()
                 }
             }
         }
