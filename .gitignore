@@ -1,2 +1,3 @@
 bin
+!src/assets/pkg
 src/assets/pkg/cartographersmod.jar
