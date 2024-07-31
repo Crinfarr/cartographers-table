@@ -1,6 +1,10 @@
 -cp src
 --main Main
+
 -L haxeui-core
 -L haxeui-hxwidgets
 -L hxWidgets
 -L hxcpp
+
+-D WXSTATIC
+-D ABI=-MD
