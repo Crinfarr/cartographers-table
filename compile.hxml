@@ -8,3 +8,6 @@
 
 -D WXSTATIC
 -D ABI=-MD
+
+--resource src/assets/pkg/cartographersmod.jar@modjar
+--resource src/assets/img/missingtex.png@missingtex
