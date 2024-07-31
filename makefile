@@ -42,4 +42,6 @@ build-mod:
 test:
 	bin/dev/Main$(exe_extension)
 test-jar-reader:
-	haxe --interp -cp src --main Test -D test_jar_reader --resource src/assets/img/missingtex.png@missingtex
+	haxe --interp -cp src --main Test -D test_jar_reader
+test-dumper:
+	haxe --interp -cp src --main Test -D test_dumper --resource src/assets/pkg/cartographersmod.jar@modjar
