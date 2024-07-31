@@ -20,7 +20,8 @@
                 "--interp",
                 "-cp src",
                 "--main Test",
-                "-D test_jar_reader"
+                "-D test_jar_reader",
+                "-D test_dumper"
             ],
             "files": [
                 "src/Test"
