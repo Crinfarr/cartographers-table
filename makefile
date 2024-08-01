@@ -30,6 +30,7 @@ init:
 	git submodule init
 	git pull --recurse-submodules
 	cd .haxelib/hxcpp/git/tools/hxcpp && haxe compile.hxml
+reinit: clean init
 fresh: clean init build-dev
 build-dev: build-mod
 	haxe compile.hxml -cpp bin/dev -D version=${ver}
