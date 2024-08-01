@@ -23,5 +23,13 @@ class MainView extends VBox {
 	@:bind(topbar, MenuEvent.MENU_SELECTED)
 	private function handleFileMenu(_e:haxe.ui.events.MenuEvent) {
         trace(_e.menuItem.id);
+        switch (_e.menuItem.id) {
+            case "new-opt":
+                //TODO block for file reading with modal dialog
+            case "open-opt":
+
+            default:
+                throw new Exception("Unknown menu item selected");
+        }
     }
 }
