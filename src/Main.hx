@@ -4,11 +4,13 @@ import modules.Registry;
 import modules.Item;
 import haxe.ui.HaxeUIApp;
 import views.MainView;
+import haxe.io.Bytes;
 
 
 class Main {
 	public static var app:HaxeUIApp;
     public static var ItemRegistry = new Registry<Item>();
+    public static var TextureRegistry = new Registry<Registry<Bytes>>();
     static function main() {
 		app = new HaxeUIApp();
         app.ready(() -> {
