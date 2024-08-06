@@ -1,5 +1,8 @@
 package modules.config;
 
+import haxe.io.Path;
+import haxe.zip.Uncompress;
+import haxe.zip.Compress;
 import haxe.ui.containers.dialogs.SaveFileDialog;
 import modules.helpers.Bitmask;
 import sys.io.File;
@@ -8,12 +11,11 @@ import sys.io.FileInput;
 import haxe.ui.containers.dialogs.OpenFileDialog;
 
 class ConfigSelector {
-    // public static final configs:Map<String, Bitmask<ConfigOpts>> = [];
-
     public static function open(rootpath:String, cb:ConfigInst->Void) {
         final dialog = new OpenFileDialog({
             readAsBinary: true,
             readContents: false,
+            title: "Pack Metadata location",
             extensions: [
                 {
                     extension: "ctpmeta",
@@ -36,5 +38,8 @@ class ConfigSelector {
                 }
             ],
         });
+        dialog.onDialogClosed = _event -> {
+            Main.conf = ConfigInst.createDefault(Path.directory(dialog.fullPath));
+        }
     }
 }

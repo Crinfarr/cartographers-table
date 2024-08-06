@@ -1,5 +1,6 @@
 package modules.config;
 
+import haxe.io.BytesBuffer;
 import haxe.io.Input;
 import haxe.io.Bytes;
 
@@ -41,4 +42,35 @@ class ConfigInst {
 		return rv;
         // 0x7fffffff
 	}
+    public static function createDefault(path:String):ConfigInst {
+        final rv = new ConfigInst();
+        rv.conf.packLoc = '.';
+        return rv;
+    }
+    @:to(Bytes)
+    public function toBytes() {
+        final b = new BytesBuffer();
+        //File header
+		b.add(Bytes.ofHex("0x02130f00020a0c041300"));
+        //Path
+        b.addByte(this.conf.packLoc.length);
+        b.addString(this.conf.packLoc);
+        //Version
+        final varr = this.conf.version.split('.');
+        /*major*/b.addByte(Std.parseInt(varr[0]));
+		/*minor*/ b.addByte(Std.parseInt(varr[1]));
+		/*patch*/ b.addByte(Std.parseInt(varr[2]));
+        //Modlist
+        b.addByte(this.conf.modList.length);
+        for (mod in this.conf.modList) {
+            b.addByte(mod.name.length);
+            b.addString(mod.name);
+            b.addByte(mod.version.length);
+            b.addString(mod.version);
+        }
+        return b;
+    }
+    public function addMod(mod:Mod) {
+        this.conf.modList.push(mod);
+    }
 }
