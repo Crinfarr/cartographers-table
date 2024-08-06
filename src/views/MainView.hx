@@ -28,6 +28,8 @@ class MainView extends VBox {
                 //TODO block for file reading with modal dialog
             case "open-opt":
 
+            case "export-opt":
+                
             default:
                 throw new Exception("Unknown menu item selected");
         }
