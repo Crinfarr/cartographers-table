@@ -1,14 +1,12 @@
 package modules.config;
 
+import haxe.Exception;
 import haxe.io.Path;
-import haxe.zip.Uncompress;
-import haxe.zip.Compress;
-import haxe.ui.containers.dialogs.SaveFileDialog;
-import modules.helpers.Bitmask;
-import sys.io.File;
-import haxe.io.Bytes;
-import sys.io.FileInput;
 import haxe.ui.containers.dialogs.OpenFileDialog;
+import haxe.ui.containers.dialogs.SaveFileDialog;
+import sys.FileSystem;
+import sys.io.File;
+import views.dialogs.ErrorDialog;
 
 class ConfigSelector {
     public static function open(rootpath:String, cb:ConfigInst->Void) {

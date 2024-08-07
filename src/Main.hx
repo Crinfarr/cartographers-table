@@ -1,11 +1,11 @@
 package ;
 
-import modules.config.ConfigInst;
-import modules.Registry;
-import modules.Item;
-import haxe.ui.HaxeUIApp;
-import views.MainView;
 import haxe.io.Bytes;
+import haxe.ui.HaxeUIApp;
+import modules.Item;
+import modules.Registry;
+import modules.config.ConfigInst;
+import views.MainView;
 
 
 class Main {

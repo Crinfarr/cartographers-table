@@ -1,17 +1,12 @@
 package views;
 
-import haxe.macro.Compiler;
-import haxe.Json;
-import sys.io.FileInput;
-import haxe.ui.containers.dialogs.OpenFileDialog;
-import haxe.io.BytesData;
-import haxe.io.Bytes;
 import sys.io.File;
-import sys.io.FileOutput;
-import haxe.ui.containers.dialogs.SaveFileDialog;
+import haxe.ui.containers.dialogs.Dialog;
 import haxe.Exception;
-import haxe.ui.events.MenuEvent;
 import haxe.ui.containers.VBox;
+import haxe.ui.events.MenuEvent;
+import modules.config.ConfigSelector;
+import views.dialogs.ErrorDialog;
 
 
 @:build(haxe.ui.ComponentBuilder.build('src/assets/views/main-view.xml'))
