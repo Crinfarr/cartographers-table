@@ -21,7 +21,8 @@
                 "-cp src",
                 "--main Test",
                 "-D test_jar_reader",
-                "-D test_dumper"
+                "-D test_dumper",
+                "-D test_mod_list",
             ],
             "files": [
                 "src/Test"
