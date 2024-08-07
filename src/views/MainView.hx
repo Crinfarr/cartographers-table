@@ -25,6 +25,8 @@ class MainView extends VBox {
 
             case "export-opt":
                 
+            case "testthrow":
+                ErrorDialog.fromException(new Exception("Can't do whatever you're doing rn"));
             default:
                 throw new Exception("Unknown menu item selected");
         }

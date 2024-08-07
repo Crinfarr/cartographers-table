@@ -5,5 +5,9 @@
             <menuitem text="Open..." id='open-opt' />
             <menuitem text="Export" id='export-opt' />
         </menu>
+        <menu text="Dev">
+            <menuitem text="Throw error" id="testthrow"/>
+            <menuitem text="Test Dialog" id="testdialog"/>
+        </menu>
     </menubar>
 </vbox>

@@ -8,6 +8,9 @@ import modules.Registry;
 import haxe.Timer;
 import modules.GameDumper;
 #end
+#if test_mod_list
+import modules.config.ConfigInst;
+#end
 class Test {
     static function main() {
         #if test_jar_reader
@@ -29,6 +32,10 @@ class Test {
 		dumper.removeMod();
         trace("Dump:");
 		trace(dumper.getDump());
+        #end
+        #if test_mod_list
+        final modlist = ConfigInst.createDefault('/home/crinfarr/.local/share/multimc/instances/modpack/.minecraft');
+        trace(modlist);
         #end
     }
 }

@@ -1,0 +1,10 @@
+<dialog width="500" height="300" title="Error" styleNames="custom-dialog-footer">
+    <vbox width="100%" height="100%">
+        <label width="100%" id="errortype" text="Error Text"/>
+        <frame id="errorblock" width="100%" height="100%" collapsible="true">
+        <scrollview width="100%" height="100%">
+            <label id="moreinfo" text="Detailed error message" width="100%" height="100%"/>
+        </scrollview>
+        </frame>
+    </vbox>
+</dialog>
