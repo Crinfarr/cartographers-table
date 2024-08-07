@@ -4,19 +4,25 @@ ifndef ver
 		ver := "0.0.0"
 	endif
 endif
-ifeq ($(filter test-module, $(MAKECMDGOALS)), "test-module")
-	test-modules = 1
+ifeq ($(shell uname),WindowsNT)
+	rmrf := rmdir -Recurse -Force
+	mvf := Move-Item -Force
+	exext := .exe
+	scext := .bat
+	preq := .\\
+else
+	rmrf := rm -rf
+	mvf := mv -f
+	exext := 
+	scext := 
+	preq := ./
 endif
 
 
 full: init build-dev
 clean: 
 	git submodule deinit --all -f
-	ifeq ($(OS),Windows_NT)
-		- rmdir -Recurse -Force bin
-	else
-		- rm -rf bin
-	endif
+	- $(rmrf) bin
 init:
 	git submodule init
 	git pull --recurse-submodules
@@ -28,22 +34,15 @@ build-dev:
 build-prod: build-mod
 	haxe compile.hxml -D no-traces -cpp bin/prod -D version=${ver}
 build-mod:
-	ifeq ($(OS),Windows_NT)
-		cd mod &&\
-		.\\gradlew.bat build &&\
-		Move-Item -Force build/libs/cartographersmod*.jar ../src/assets/pkg/cartographersmod.jar
-	else
-		cd mod &&\
-		./gradlew build &&\
-		mv -f build/libs/cartographersmod*.jar ../src/assets/pkg/cartographersmod.jar
-	endif
+	cd mod &&\
+	$(preq)gradlew$(scext) build &&\
+	$(mvf) build/libs/cartographersmod*.jar ../src/assets/pkg/cartographersmod.jar
 test:
-	ifeq ($(OS),Windows_NT)
-		bin/dev/Main.exe
-	else
-		bin/dev/Main
-	endif
+	bin/dev/Main$(exext)
+	
 test-jar-reader:
 	haxe --interp -cp src --main Test -D test_jar_reader
 test-dumper:
 	haxe --interp -cp src --main Test -D test_dumper --resource src/assets/pkg/cartographersmod.jar@modjar
+test-mod-list:
+	haxe --interp -cp src --main Test -D test_mod_list
