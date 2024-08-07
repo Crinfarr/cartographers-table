@@ -9,7 +9,7 @@ import sys.io.File;
 import views.dialogs.ErrorDialog;
 
 class ConfigSelector {
-    public static function open(rootpath:String, cb:ConfigInst->Void) {
+    public static function open(cb:ConfigInst->Void) {
         final dialog = new OpenFileDialog({
             readAsBinary: true,
             readContents: false,
@@ -21,14 +21,17 @@ class ConfigSelector {
                 }
             ],
         });
-        dialog.show();
         dialog.onDialogClosed = _event -> {
+            if (_event.button.toString() == "{{cancel}}")
+                return;
             cb(ConfigInst.create(File.read(dialog.selectedFiles[0].fullPath)));
         }
+		dialog.show();
     }
-    public static function create(rootpath:String, cb:ConfigInst->Void) {
+    public static function create(cb:ConfigInst->Void) {
         final dialog = new SaveFileDialog({
             writeAsBinary: true,
+            title: "Create Pack Metadata",
             extensions: [
                 {
                     extension: "ctpmeta",
@@ -37,7 +40,15 @@ class ConfigSelector {
             ],
         });
         dialog.onDialogClosed = _event -> {
-            Main.conf = ConfigInst.createDefault(Path.directory(dialog.fullPath));
+			if (_event.button.toString() == "{{cancel}}")
+				return;
+			final mcfolder = Path.directory(dialog.fullPath);
+            if (!FileSystem.exists('$mcfolder/mods') || !FileSystem.isDirectory('$mcfolder/mods')) {
+                ErrorDialog.fromException(new Exception("Could not locate mods folder"));
+                return;
+            }
+            Main.conf = ConfigInst.createDefault(mcfolder);
         }
+        dialog.show();
     }
 }

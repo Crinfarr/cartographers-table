@@ -20,8 +20,14 @@ class MainView extends VBox {
         trace(_e.menuItem.id);
         switch (_e.menuItem.id) {
             case "new-opt":
-                //TODO block for file reading with modal dialog
+                ConfigSelector.create((conf) -> {
+                    Main.conf = conf;
+                    final saver = File.write()
+                });
             case "open-opt":
+                ConfigSelector.open((conf) -> {
+                    Main.conf = conf;
+                });
 
             case "export-opt":
                 
