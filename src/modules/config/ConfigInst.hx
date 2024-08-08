@@ -37,7 +37,7 @@ class ConfigInst {
 
 	public static function create(ifl:Input):ConfigInst {
 		final rv = new ConfigInst();
-		if (ifl.read(10) != Bytes.ofHex("0x02130f00020a0c041300"))
+		if (ifl.read(10) != Bytes.ofHex("02130f00020a0c041300"))//FIXME this doesn't work at all 
 			throw "Invalid file: header check failed";
 		final path = ifl.readString(ifl.readByte());
 		final version = '${ifl.readByte()}.${ifl.readByte()}.${ifl.readByte}';
@@ -94,7 +94,22 @@ class ConfigInst {
 			trace('Found ${reName.matched(1)} v/${reVersion.matched(1)}');
 			version = reVersion.matched(1);
 			name = reName.matched(1);
-			// if (name == "${file.jarVersion}")//TODO read manifest only if necessary
+			if (version == "${file.jarVersion}") {
+                final reManifest = ~/(?:^[ \t]*Implementation-Version: ?)(.+)/gm;
+                trace("Reading jar metadata");
+                for (entry in entries) {
+                    if (entry.fileName == "META-INF/MANIFEST.MF") {
+                        entry.uncompress();
+                        metadata = entry.data.toString();
+                        if (reManifest.match(metadata))
+                            trace('Found manifest version')
+                        else
+                            trace(metadata);
+                        version = reManifest.matched(1);
+                        trace('Detected manifest version as $version');
+                    }
+                }
+            }
 			
 			returns.push({
 				name: name,
@@ -120,7 +135,7 @@ class ConfigInst {
 	public function toBytes() {
 		final b = new BytesBuffer();
 		// File header
-		b.add(Bytes.ofHex("0x02130f00020a0c041300"));
+		b.add(Bytes.ofHex("02130f00020a0c041300"));
 		// Path
 		b.addByte(this.conf.packLoc.length);
 		b.addString(this.conf.packLoc);
@@ -137,7 +152,7 @@ class ConfigInst {
 			b.addByte(mod.version.length);
 			b.addString(mod.version);
 		}
-		return b;
+		return b.getBytes();
 	}
 
 	public function addMod(mod:Mod) {

@@ -24,7 +24,8 @@ class ConfigSelector {
         dialog.onDialogClosed = _event -> {
             if (_event.button.toString() == "{{cancel}}")
                 return;
-            cb(ConfigInst.create(File.read(dialog.selectedFiles[0].fullPath)));
+            Main.conf = ConfigInst.create(File.read(dialog.selectedFiles[0].fullPath));
+            cb(Main.conf);
         }
 		dialog.show();
     }
@@ -48,6 +49,8 @@ class ConfigSelector {
                 return;
             }
             Main.conf = ConfigInst.createDefault(mcfolder);
+			File.saveBytes('${dialog.fullPath}.ctpmeta', Main.conf.toBytes());
+			cb(Main.conf);
         }
         dialog.show();
     }

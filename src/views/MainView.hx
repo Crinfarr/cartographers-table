@@ -21,12 +21,11 @@ class MainView extends VBox {
         switch (_e.menuItem.id) {
             case "new-opt":
                 ConfigSelector.create((conf) -> {
-                    Main.conf = conf;
-                    final saver = File.write()
+                    trace("Created new config");
                 });
             case "open-opt":
                 ConfigSelector.open((conf) -> {
-                    Main.conf = conf;
+                    trace("Opened config");
                 });
 
             case "export-opt":
