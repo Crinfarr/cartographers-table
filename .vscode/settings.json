@@ -3,7 +3,8 @@
         {
             "args": [
                 "compile.hxml",
-                "-cpp bin/dev"
+                "-cpp bin/dev",
+                "-D DEVMODE"
             ],
             "label": "Dev"
         },

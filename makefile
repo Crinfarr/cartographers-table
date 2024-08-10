@@ -30,7 +30,7 @@ init:
 reinit: clean init
 fresh: clean init build-dev
 build-dev:
-	haxe compile.hxml -cpp bin/dev -D version=${ver}
+	haxe compile.hxml -cpp bin/dev -D version=${ver} -D DEVMODE
 build-prod: build-mod
 	haxe compile.hxml -D no-traces -cpp bin/prod -D version=${ver}
 build-mod:
