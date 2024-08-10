@@ -1,8 +1,10 @@
 package modules.config;
 
+import haxe.Timer;
 import haxe.macro.Compiler;
 import haxe.Exception;
 #if !test_mod_list import views.dialogs.ErrorDialog; #end
+import modules.helpers.Registry;
 import haxe.zip.Entry;
 import haxe.zip.Tools;
 import sys.io.File;
@@ -21,13 +23,14 @@ using haxe.zip.Tools;
 private typedef Mod = {
 	name:String,
 	version:String,
+	items:Registry<Bytes>
 }
 
 private typedef ConfigOpts = {
 	packLoc:String, // Stored as UTF-8 file path relative to this config
 	version:String, // Stored as (v&0xff0000).(v&0x00ff00).(v&0x0000ff)
 	// PS fuck you mojang for going above 1.16 now I have to use a full byte
-	modList:Array<Mod>
+	modList:Array<Mod>,
 }
 
 class ConfigInst {
@@ -36,24 +39,42 @@ class ConfigInst {
 	private function new() {}
 
 	public static function create(ifl:Input):ConfigInst {
+		trace('Loading config');
+		#if DEVMODE
+		final stts = Timer.stamp();
+		#end
 		final rv = new ConfigInst();
-		if (ifl.read(10) != Bytes.ofHex("02130f00020a0c041300"))//FIXME this doesn't work at all 
+		if (ifl.read(10).compare(Bytes.ofHex("02130f00020a0c041300")) != 0) // FIXME this doesn't work at all
 			throw "Invalid file: header check failed";
 		final path = ifl.readString(ifl.readByte());
-		final version = '${ifl.readByte()}.${ifl.readByte()}.${ifl.readByte}';
+		trace('Path set to $path');
+		final version = '${ifl.readByte()}.${ifl.readByte()}.${ifl.readByte()}';
+		trace('Using cartographer\'s mod v//$version');
 		final modList:Array<Mod> = [];
 		for (_ in 0...ifl.readByte()) {
 			// Mod data logic
+			final modname = ifl.readString(ifl.readByte());
+			final modversion = ifl.readString(ifl.readByte());
+            //FIXME
+			final modItems = new Registry<Bytes>();
+            for (mod in 0...ifl.readByte()) {
+                modItems.assign(ifl.readString(ifl.readByte()), ifl.read(ifl.readInt32()));
+            }
 			modList.push({
-				name: ifl.readString(ifl.readByte()),
-				version: ifl.readString(ifl.readByte())
+				name: modname,
+				version: modversion,
+                items: modItems
 			});
+			trace('Found $modname v//$modversion');
 		}
 		rv.conf = {
 			packLoc: path,
 			modList: modList,
 			version: version
 		}
+		#if DEVMODE
+		trace('Loaded config in ${(Timer.stamp() - stts) * 1000}ms');
+		#end
 		return rv;
 		// 0x7fffffff
 	}
@@ -77,7 +98,7 @@ class ConfigInst {
 			}
 			#if !test_mod_list
 			if (metadata == null)
-                ErrorDialog.fromException(new Exception('Could not find mod metadata for $mod'));
+				ErrorDialog.fromException(new Exception('Could not find mod metadata for $mod'));
 			#end
 			final reVersion = ~/(?:^[ \t]*version ?= ?")(.+)(?:")/gm;
 			var version:String = '';
@@ -85,8 +106,8 @@ class ConfigInst {
 			var name:String = '';
 			if (reVersion.match(metadata.toString()))
 				trace("Found version");
-            else
-                trace("could not find version");
+			else
+				trace("could not find version");
 			if (reName.match(metadata.toString()))
 				trace("Found name");
 			else
@@ -95,25 +116,26 @@ class ConfigInst {
 			version = reVersion.matched(1);
 			name = reName.matched(1);
 			if (version == "${file.jarVersion}") {
-                final reManifest = ~/(?:^[ \t]*Implementation-Version: ?)(.+)/gm;
-                trace("Reading jar metadata");
-                for (entry in entries) {
-                    if (entry.fileName == "META-INF/MANIFEST.MF") {
-                        entry.uncompress();
-                        metadata = entry.data.toString();
-                        if (reManifest.match(metadata))
-                            trace('Found manifest version')
-                        else
-                            trace(metadata);
-                        version = reManifest.matched(1);
-                        trace('Detected manifest version as $version');
-                    }
-                }
-            }
-			
+				final reManifest = ~/(?:^[ \t]*Implementation-Version: ?)(.+)/gm;
+				trace("Reading jar metadata");
+				for (entry in entries) {
+					if (entry.fileName == "META-INF/MANIFEST.MF") {
+						entry.uncompress();
+						metadata = entry.data.toString();
+						if (reManifest.match(metadata))
+							trace('Found manifest version')
+						else
+							trace(metadata);
+						version = reManifest.matched(1);
+						trace('Detected manifest version as $version');
+					}
+				}
+			}
+
 			returns.push({
 				name: name,
-				version: version
+				version: version,
+				items: new Registry<Bytes>()
 			});
 		}
 
@@ -151,6 +173,13 @@ class ConfigInst {
 			b.addString(mod.name);
 			b.addByte(mod.version.length);
 			b.addString(mod.version);
+            b.addByte(mod.items.size);
+            for (name => tex in mod.items.iterator()) {
+                b.addByte(name.length);
+                b.addString(name);
+                b.addInt32(tex.length);
+                b.add(tex);
+            }
 		}
 		return b.getBytes();
 	}
