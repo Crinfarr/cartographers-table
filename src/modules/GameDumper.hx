@@ -1,16 +1,9 @@
 package modules;
 
-import sys.thread.Lock;
-import haxe.io.Bytes;
-import haxe.Timer;
 import haxe.Exception;
 import haxe.Resource;
-import haxe.macro.Compiler;
-import sys.io.File;
-import haxe.display.Display.Package;
-import eval.luv.File.FileSymlinkFlag;
-import sys.io.FileSeek;
 import sys.FileSystem;
+import sys.io.File;
 
 class GameDumper {
     private final instPath:String;
