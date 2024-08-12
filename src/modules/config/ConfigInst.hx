@@ -23,7 +23,7 @@ using haxe.zip.Tools;
 private typedef Mod = {
 	name:String,
 	version:String,
-	items:Registry<Bytes>
+	// items:Registry<Bytes>
 }
 
 private typedef ConfigOpts = {
@@ -31,10 +31,11 @@ private typedef ConfigOpts = {
 	version:String, // Stored as (v&0xff0000).(v&0x00ff00).(v&0x0000ff)
 	// PS fuck you mojang for going above 1.16 now I have to use a full byte
 	modList:Array<Mod>,
+    itemList:Registry<Bytes>,
 }
 
 class ConfigInst {
-	private var conf:ConfigOpts;
+	public var conf:ConfigOpts;
 
 	private function new() {}
 
@@ -55,22 +56,29 @@ class ConfigInst {
 			// Mod data logic
 			final modname = ifl.readString(ifl.readByte());
 			final modversion = ifl.readString(ifl.readByte());
-            //FIXME
-			final modItems = new Registry<Bytes>();
-            for (mod in 0...ifl.readByte()) {
-                modItems.assign(ifl.readString(ifl.readByte()), ifl.read(ifl.readInt32()));
-            }
+			// final modItems = new Registry<Bytes>();
+            // for (mod in 0...ifl.readByte()) {
+            //     modItems.assign(ifl.readString(ifl.readByte()), ifl.read(ifl.readInt32()));
+            // }
 			modList.push({
 				name: modname,
 				version: modversion,
-                items: modItems
+                // items: modItems
 			});
 			trace('Found $modname v//$modversion');
 		}
+        final itemList = new Registry<Bytes>();
+        for (_ in 0...ifl.readInt32()) {
+            //Item index
+            final itemName = ifl.readString(ifl.readByte());
+            final itemTex = ifl.read(ifl.readInt32());
+            itemList.assign(itemName, itemTex);
+        }
 		rv.conf = {
 			packLoc: path,
 			modList: modList,
-			version: version
+			version: version,
+            itemList: itemList
 		}
 		#if DEVMODE
 		trace('Loaded config in ${(Timer.stamp() - stts) * 1000}ms');
@@ -79,7 +87,7 @@ class ConfigInst {
 		// 0x7fffffff
 	}
 
-	private static function makeModList(modFolder:String):Array<Mod> {
+	public static function makeModList(modFolder:String):Array<Mod> {
 		final mods:Array<Path> = [
 			for (itm in FileSystem.readDirectory(modFolder).filter(f -> f.endsWith('.jar')))
 				new Path('$modFolder/$itm')
@@ -135,7 +143,7 @@ class ConfigInst {
 			returns.push({
 				name: name,
 				version: version,
-				items: new Registry<Bytes>()
+				// items: new Registry<Bytes>()
 			});
 		}
 
@@ -148,7 +156,8 @@ class ConfigInst {
 		rv.conf = {
 			packLoc: ".",
 			modList: makeModList('$path/mods'),
-			version: Compiler.getDefine("version")
+			version: Compiler.getDefine("version"),
+            itemList: new Registry<Bytes>()
 		}
 		return rv;
 	}
@@ -173,18 +182,28 @@ class ConfigInst {
 			b.addString(mod.name);
 			b.addByte(mod.version.length);
 			b.addString(mod.version);
-            b.addByte(mod.items.size);
-            for (name => tex in mod.items.iterator()) {
-                b.addByte(name.length);
-                b.addString(name);
-                b.addInt32(tex.length);
-                b.add(tex);
-            }
+            // b.addByte(mod.items.size);
+            // for (name => tex in mod.items.iterator()) {
+            //     b.addByte(name.length);
+            //     b.addString(name);
+            //     b.addInt32(tex.length);
+            //     b.add(tex);
+            // }
 		}
+        b.addInt32(this.conf.itemList.size);
+        for (name => tex in this.conf.itemList.iterator()) {
+            b.addByte(name.length);
+            b.addString(name);
+            b.addInt32(tex.length);
+            b.add(tex);
+        }
 		return b.getBytes();
 	}
 
 	public function addMod(mod:Mod) {
 		this.conf.modList.push(mod);
 	}
+    public function addItem(name:String, tex:Bytes) {
+        this.conf.itemList.assign(name, tex);
+    }
 }
