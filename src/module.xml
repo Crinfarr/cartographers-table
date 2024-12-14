@@ -4,6 +4,6 @@
         <resource path="src/assets" prefix="assets"/>
     </resources>
     <components>
-        <component package="components"/>
+        <component package="modules.components"/>
     </components>
 </module>
