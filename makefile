@@ -4,7 +4,7 @@ ifndef ver
 		ver := "0.0.0"
 	endif
 endif
-ifeq ($(shell uname),WindowsNT)
+ifeq ($(OS),Windows_NT)
 	rmrf := rmdir -Recurse -Force
 	mvf := Move-Item -Force
 	exext := .exe
@@ -46,3 +46,5 @@ test-dumper:
 	haxe --interp -cp src --main Test -D test_dumper --resource src/assets/pkg/cartographersmod.jar@modjar
 test-mod-list:
 	haxe --interp -cp src --main Test -D test_mod_list
+test-os-detect:
+	@echo $(OS)
