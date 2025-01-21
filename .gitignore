@@ -1,3 +1,3 @@
-bin
-!src/assets/pkg
-src/assets/pkg/cartographersmod.jar
+# Godot 4+ specific ignores
+.godot/
+/android/
