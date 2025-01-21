@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2r2l082iq3k0"]
+
+[ext_resource type="Script" path="res://scripts/popup/InitDialog.cs" id="1_hte88"]
+[ext_resource type="Texture2D" uid="uid://id4psvynd51f" path="res://assets/images/cartographytable.png" id="1_wv7al"]
+[ext_resource type="FontFile" uid="uid://btby6l20yd7ch" path="res://assets/fonts/CatShop.ttf" id="2_vbmls"]
+[ext_resource type="Texture2D" uid="uid://djilii30ca48i" path="res://assets/icons/file-add.svg" id="3_yss7a"]
+[ext_resource type="Texture2D" uid="uid://dei6tvo2uoaio" path="res://assets/icons/folder.svg" id="4_dpv2e"]
+
+[node name="InitDialog" type="Window"]
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(800, 600)
+transient = true
+exclusive = true
+unresizable = true
+popup_window = true
+script = ExtResource("1_hte88")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_wv7al")
+
+[node name="Label" type="Label" parent="Control/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vbmls")
+theme_override_font_sizes/font_size = 60
+text = "Cartographer's
+Table"
+horizontal_alignment = 1
+
+[node name="NewProject" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "New"
+icon = ExtResource("3_yss7a")
+
+[node name="OpenProject" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Open"
+icon = ExtResource("4_dpv2e")
