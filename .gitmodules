@@ -1,0 +1,3 @@
+[submodule "external/cartographers-mod"]
+	path = external/cartographers-mod
+	url = https://github.com/crinfarr/cartographers-mod
