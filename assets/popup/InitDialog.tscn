@@ -16,7 +16,7 @@ unresizable = true
 popup_window = true
 script = ExtResource("1_hte88")
 
-[node name="Control" type="Control" parent="."]
+[node name="CreateOrOpen" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Control"]
+[node name="CenterContainer" type="CenterContainer" parent="CreateOrOpen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,17 +32,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateOrOpen/CenterContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateOrOpen/CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CreateOrOpen/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("1_wv7al")
 
-[node name="Label" type="Label" parent="Control/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="CreateOrOpen/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_vbmls")
 theme_override_font_sizes/font_size = 60
@@ -50,12 +50,114 @@ text = "Cartographer's
 Table"
 horizontal_alignment = 1
 
-[node name="NewProject" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="NewProject" type="Button" parent="CreateOrOpen/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "New"
 icon = ExtResource("3_yss7a")
 
-[node name="OpenProject" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="OpenProject" type="Button" parent="CreateOrOpen/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Open"
 icon = ExtResource("4_dpv2e")
+
+[node name="ProjectSetup" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProjectSetup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LogoBox" type="HBoxContainer" parent="ProjectSetup/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ProjectSetup/VBoxContainer/LogoBox"]
+layout_mode = 2
+texture = ExtResource("1_wv7al")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="ProjectSetup/VBoxContainer/LogoBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vbmls")
+theme_override_font_sizes/font_size = 40
+text = "Cartographer's
+Table"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="ProjectSetup/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProjectSetup/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="ProjectNameLabel" type="Label" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Project Name: "
+horizontal_alignment = 2
+
+[node name="ProjectName" type="LineEdit" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SavePathLabel" type="Label" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Save Path"
+horizontal_alignment = 2
+
+[node name="SavePath" type="Button" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Select..."
+icon = ExtResource("3_yss7a")
+
+[node name="MinecraftVersionLabel" type="Label" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Minecraft Version"
+horizontal_alignment = 2
+
+[node name="MCVersion" type="OptionButton" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "1.20.1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ProjectSetup/VBoxContainer"]
+layout_mode = 2
+
+[node name="CancelButton" type="Button" parent="ProjectSetup/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="CreateButton" type="Button" parent="ProjectSetup/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create"
