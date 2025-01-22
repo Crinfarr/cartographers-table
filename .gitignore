@@ -3,3 +3,4 @@
 /android/
 !packaged
 packaged/cartographersmod*.jar
+.vscode/settings.json
