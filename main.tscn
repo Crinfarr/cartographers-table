@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ojiljuinmf8l"]
+[gd_scene load_steps=8 format=3 uid="uid://ojiljuinmf8l"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_ejvyk"]
 [ext_resource type="Texture2D" uid="uid://djilii30ca48i" path="res://assets/icons/file-add.svg" id="1_uq1rb"]
 [ext_resource type="Texture2D" uid="uid://dei6tvo2uoaio" path="res://assets/icons/folder.svg" id="2_i4l5l"]
 [ext_resource type="Script" path="res://scripts/CraftingNodes.cs" id="4_o1pdq"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7k4hj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7dblv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3n5t3"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -57,13 +63,63 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GraphEdit" type="GraphEdit" parent="VBoxContainer/HBoxContainer/Container"]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("4_o1pdq")
 
-[node name="ItemSearch" type="PopupPanel" parent="VBoxContainer/HBoxContainer/Container/GraphEdit"]
+[node name="ContextMenu" type="PopupMenu" parent="VBoxContainer/HBoxContainer/Container/GraphEdit"]
+item_count = 3
+item_0/text = "Resource Node"
+item_1/text = "Pattern Node"
+item_1/id = 1
+item_2/text = "Output Node"
+item_2/id = 2
 
-[node name="ItemList" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/ItemSearch"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 96.0
-offset_bottom = 96.0
+[node name="NodeBox" type="TabContainer" parent="VBoxContainer/HBoxContainer/Container/GraphEdit"]
+visible = false
+layout_mode = 2
+offset_right = 884.0
+offset_bottom = 613.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Resources" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_tab_index = 0
+
+[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox/Resources"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+item_count = 3
+item_0/text = "Item"
+item_0/icon = SubResource("PlaceholderTexture2D_7k4hj")
+item_1/text = "Number"
+item_1/icon = SubResource("PlaceholderTexture2D_7dblv")
+item_2/text = "NBT"
+item_2/icon = SubResource("PlaceholderTexture2D_3n5t3")
+
+[node name="Transforms" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox/Transforms"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Outputs" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_tab_index = 2
+
+[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox/Outputs"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

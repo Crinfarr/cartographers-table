@@ -1,11 +1,10 @@
 using Godot;
 using System;
+using System.Reflection;
 using System.Security.Principal;
 
 public partial class InitDialog : Window
 {
-    // Called when the node enters the scene tree for the first time.
-
     [Signal]
     public delegate void FileOpenQueuedEventHandler(string path);
     [Signal]
@@ -16,8 +15,8 @@ public partial class InitDialog : Window
         Control setupPanel = GetNode<Control>("ProjectSetup");
         Button newButton = GetNode<Button>("%NewProject");
         Button openButton = GetNode<Button>("%OpenProject");
-        Button saveNew = GetNode<Button>("%CreateButton");
-        Button cancelNew = GetNode<Button>("%CancelButton");
+        Button createButton = GetNode<Button>("%CreateButton");
+        Button cancelButton = GetNode<Button>("%CancelButton");
         this.FilesDropped += (files) => {
             if (files.Length > 1) {
                 return;
@@ -30,7 +29,7 @@ public partial class InitDialog : Window
         {
             initPanel.Hide();
             setupPanel.Show();
-            GetNode<Button>("%SaveNew").Pressed += () => {
+            GetNode<Button>("%SavePath").Pressed += () => {
                 FileDialog selPathDialog = new FileDialog();
                 selPathDialog.CurrentDir = "user://";
                 selPathDialog.Access = FileDialog.AccessEnum.Filesystem;
@@ -39,25 +38,24 @@ public partial class InitDialog : Window
                 selPathDialog.CurrentFile = "modpack.ctpak";
                 selPathDialog.Filters = new string[] {"*.ctpak;Cartographer's Modpack"};
                 selPathDialog.FileSelected += (filePath) => {
-                    GetNode<Button>("%SaveNew").Text = filePath;
+                    GetNode<Button>("%SavePath").Text = filePath;
                 };
+                this.AddChild(selPathDialog);
+                selPathDialog.Show();
             };
-            saveNew.Pressed += () => {
-                EmitSignal(SignalName.FileCreateQueued, GetNode<Button>("%SaveNew").Text);
+            createButton.Pressed += () => {
+                if (GetNode<Button>("%SavePath").Text == "Select...")
+                    GetNode<Button>("%SavePath").Text = "./pack.ctpak";
+                EmitSignal(SignalName.FileCreateQueued, GetNode<Button>("%SavePath").Text);
             };
-            cancelNew.Pressed += () => {
+            cancelButton.Pressed += () => {
                 setupPanel.Hide();
                 GetNode<LineEdit>("%ProjectName").Text = "";
                 GetNode<OptionButton>("%MCVersion").Selected = 0;
                 initPanel.Show();
             };
-            /*
-            
-            */
         };
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
     }

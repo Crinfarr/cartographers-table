@@ -13,7 +13,6 @@ size = Vector2i(800, 600)
 transient = true
 exclusive = true
 unresizable = true
-popup_window = true
 script = ExtResource("1_hte88")
 
 [node name="CreateOrOpen" type="Control" parent="."]
