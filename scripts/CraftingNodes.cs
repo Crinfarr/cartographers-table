@@ -17,9 +17,9 @@ public partial class CraftingNodes : GraphEdit
                             child.Hide();
             if (ievent is not InputEventMouseButton) return;
             InputEventMouseButton ieMouse = (InputEventMouseButton)ievent;
-            GD.Print("MouseEvent fired");
-            if (ieMouse.ButtonIndex == MouseButton.Right)
+            if (ieMouse.ButtonIndex == MouseButton.Right && ieMouse.Pressed)
             {
+                GD.Print("MouseEvent fired");
                 // PopupMenu searchpanel = GetNode<PopupMenu>("ContextMenu");
                 // searchpanel.Position = (Vector2I)(ieMouse.GlobalPosition + GetWindow().Position);
                 // searchpanel.Popup();
@@ -28,27 +28,24 @@ public partial class CraftingNodes : GraphEdit
                 foreach (ScrollContainer child in nodesBox.GetChildren())
                 {
                     ItemList nodes = child.GetNode<ItemList>("container");
-                    Action<long> iselected = (_)=>{};
-                    iselected = (item) =>
+                    Action<long, Variant, Variant> iclicked = (item, _, _) =>
                     {
                         nodesBox.Hide();
-                        if (item == 0)
+                        // if (item == 0)
                         {
                             GraphNode node = ResourceLoader
                                 .Load<PackedScene>("res://assets/graphNodes/ItemSelector.tscn")
                                 .Instantiate<GraphNode>();
                             AddChild(node);
-                            nodes.ItemSelected -= iselected.Invoke;
+                            node.SetPosition(GetGlobalMousePosition());
                         }
                         
                     };
-                    nodes.ItemSelected += iselected.Invoke;
+                    nodes.Connect(ItemList.SignalName.ItemClicked, Callable.From(iclicked), (uint) ConnectFlags.OneShot);
                 }
             }
         };
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
     }
