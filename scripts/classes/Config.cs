@@ -1,7 +1,4 @@
 using Godot;
-using Godot.NativeInterop;
-using System;
-using System.IO;
 
 public partial class Config : Resource
 {
