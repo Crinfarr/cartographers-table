@@ -18,10 +18,6 @@ public partial class CraftingNodes : GraphEdit
             InputEventMouseButton ieMouse = (InputEventMouseButton)ievent;
             if (ieMouse.ButtonIndex == MouseButton.Right && ieMouse.Pressed)
             {
-                GD.Print("MouseEvent fired");
-                // PopupMenu searchpanel = GetNode<PopupMenu>("ContextMenu");
-                // searchpanel.Position = (Vector2I)(ieMouse.GlobalPosition + GetWindow().Position);
-                // searchpanel.Popup();
                 TabContainer nodesBox = GetNode<TabContainer>("NodeBox");
                 nodesBox.Show();
                 foreach (ScrollContainer child in nodesBox.GetChildren())
@@ -36,11 +32,11 @@ public partial class CraftingNodes : GraphEdit
                                 .Load<PackedScene>("res://assets/graphNodes/ItemSelector.tscn")
                                 .Instantiate<GraphNode>();
                             AddChild(node);
-                            node.SetPosition(GetGlobalMousePosition());
+                            node.PositionOffset = this.ScrollOffset + GetLocalMousePosition();
                         }
-                        
+
                     };
-                    nodes.Connect(ItemList.SignalName.ItemClicked, Callable.From(iclicked), (uint) ConnectFlags.OneShot);
+                    nodes.Connect(ItemList.SignalName.ItemClicked, Callable.From(iclicked), (uint)ConnectFlags.OneShot);
                 }
             }
         };
