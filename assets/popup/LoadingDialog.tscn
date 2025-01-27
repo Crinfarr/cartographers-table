@@ -1,3 +1,22 @@
 [gd_scene format=3 uid="uid://qm3rggrtd7g5"]
 
 [node name="LoadingDialog" type="Window"]
+title = "Loading..."
+size = Vector2i(300, 200)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Loading..."
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
