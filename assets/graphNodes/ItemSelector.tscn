@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4innb0ekftpq"]
+[gd_scene load_steps=3 format=3 uid="uid://d4innb0ekftpq"]
+
+[ext_resource type="Script" path="res://assets/graphNodes/ItemSelector.cs" id="1_r5ngj"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6ii80"]
 size = Vector2(32, 32)
@@ -14,6 +16,7 @@ slot/0/right_type = 0
 slot/0/right_color = Color(0, 1, 0, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
+script = ExtResource("1_r5ngj")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
