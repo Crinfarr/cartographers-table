@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2r2l082iq3k0"]
 
-[ext_resource type="Script" path="res://scripts/popup/InitDialog.cs" id="1_hte88"]
+[ext_resource type="Script" uid="uid://k8o14jwfu4wh" path="res://scripts/popup/InitDialog.cs" id="1_hte88"]
 [ext_resource type="Texture2D" uid="uid://id4psvynd51f" path="res://assets/images/cartographytable.png" id="1_wv7al"]
 [ext_resource type="FontFile" uid="uid://btby6l20yd7ch" path="res://assets/fonts/CatShop.ttf" id="2_vbmls"]
 [ext_resource type="Texture2D" uid="uid://djilii30ca48i" path="res://assets/icons/file-add.svg" id="3_yss7a"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://ojiljuinmf8l"]
 
-[ext_resource type="Script" path="res://Main.cs" id="1_ejvyk"]
+[ext_resource type="Script" uid="uid://bq7u0o4rxuerf" path="res://Main.cs" id="1_ejvyk"]
 [ext_resource type="Texture2D" uid="uid://djilii30ca48i" path="res://assets/icons/file-add.svg" id="1_uq1rb"]
 [ext_resource type="Texture2D" uid="uid://dei6tvo2uoaio" path="res://assets/icons/folder.svg" id="2_i4l5l"]
-[ext_resource type="Script" path="res://scripts/CraftingNodes.cs" id="4_o1pdq"]
+[ext_resource type="Script" uid="uid://hb31emjlcmsy" path="res://scripts/CraftingNodes.cs" id="4_o1pdq"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7k4hj"]
 
