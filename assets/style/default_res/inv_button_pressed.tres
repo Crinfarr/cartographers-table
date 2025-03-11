@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://2vo5lujtj5bv"]
+
+[ext_resource type="Texture2D" uid="uid://cy2kxqrxlh0yw" path="res://assets/style/default_res/png/button_pressed_sm.png" id="1_gmgkg"]
+
+[resource]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+texture = ExtResource("1_gmgkg")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0

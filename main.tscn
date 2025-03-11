@@ -70,6 +70,7 @@ layout_mode = 2
 script = ExtResource("4_o1pdq")
 
 [node name="ContextMenu" type="PopupMenu" parent="VBoxContainer/HBoxContainer/Container/GraphEdit"]
+size = Vector2i(136, 100)
 item_count = 3
 item_0/text = "Resource Node"
 item_0/id = 0
@@ -78,22 +79,21 @@ item_1/id = 1
 item_2/text = "Output Node"
 item_2/id = 2
 
-[node name="NodeBox" type="TabContainer" parent="VBoxContainer/HBoxContainer/Container/GraphEdit"]
+[node name="NodeBox" type="TabContainer" parent="VBoxContainer/HBoxContainer/Container"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_right = 884.0
-offset_bottom = 613.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Resources" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox"]
+[node name="Resources" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/NodeBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 metadata/_tab_index = 0
 
-[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox/Resources"]
+[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/NodeBox/Resources"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -105,24 +105,24 @@ item_1/icon = SubResource("PlaceholderTexture2D_7dblv")
 item_2/text = "NBT"
 item_2/icon = SubResource("PlaceholderTexture2D_3n5t3")
 
-[node name="Transforms" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox"]
+[node name="Transforms" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/NodeBox"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox/Transforms"]
+[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/NodeBox/Transforms"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Outputs" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox"]
+[node name="Outputs" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Container/NodeBox"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 metadata/_tab_index = 2
 
-[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/GraphEdit/NodeBox/Outputs"]
+[node name="container" type="ItemList" parent="VBoxContainer/HBoxContainer/Container/NodeBox/Outputs"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

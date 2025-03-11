@@ -26,3 +26,7 @@ window/per_pixel_transparency/allowed=true
 [dotnet]
 
 project/assembly_name="cartographers table"
+
+[gui]
+
+theme/custom="uid://ue6o1suqydcw"

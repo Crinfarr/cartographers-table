@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://ch0vn23wngwy1"]
+
+[ext_resource type="Texture2D" uid="uid://ddrceldpjxwrv" path="res://assets/style/default_res/png/text_field_sm.png" id="1_kbn2p"]
+
+[resource]
+texture = ExtResource("1_kbn2p")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0

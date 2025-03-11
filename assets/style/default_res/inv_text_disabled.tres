@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://ctet3x6sojb1b"]
+
+[ext_resource type="Texture2D" uid="uid://7dx063idw2wf" path="res://assets/style/default_res/png/text_field_disabled_sm.png" id="1_ohhpm"]
+
+[resource]
+texture = ExtResource("1_ohhpm")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0

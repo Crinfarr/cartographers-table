@@ -18,7 +18,7 @@ public partial class CraftingNodes : GraphEdit
             InputEventMouseButton ieMouse = (InputEventMouseButton)ievent;
             if (ieMouse.ButtonIndex == MouseButton.Right && ieMouse.Pressed)
             {
-                TabContainer nodesBox = GetNode<TabContainer>("NodeBox");
+                TabContainer nodesBox = GetNode<TabContainer>("%NodeBox");
                 nodesBox.Show();
                 foreach (ScrollContainer child in nodesBox.GetChildren())
                 {
