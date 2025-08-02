@@ -10,10 +10,16 @@ public partial class CraftingNodes : GraphEdit
         this.GuiInput += (ievent) =>
         {
             if (ievent is InputEventKey)
+            {
                 if (((InputEventKey)ievent).Keycode == Key.Delete)
+                {
                     foreach (GraphNode child in this.GetChildren().Where((n) => n is GraphNode))
                         if (child.Selected)
                             child.Hide();
+                }
+                if (((InputEventKey)ievent).Keycode == Key.Escape)
+                    GetNode<TabContainer>("%NodeBox").Hide();
+            }
             if (ievent is not InputEventMouseButton) return;
             InputEventMouseButton ieMouse = (InputEventMouseButton)ievent;
             if (ieMouse.ButtonIndex == MouseButton.Right && ieMouse.Pressed)

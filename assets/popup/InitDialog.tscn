@@ -123,6 +123,17 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="ModsPathLabel" type="Label" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Mods Folder"
+horizontal_alignment = 2
+
+[node name="ModsPathLabel2" type="Button" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Select..."
+icon = ExtResource("4_dpv2e")
+
 [node name="SavePathLabel" type="Label" parent="ProjectSetup/VBoxContainer/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Save Path"
@@ -145,6 +156,7 @@ layout_mode = 2
 selected = 0
 item_count = 1
 popup/item_0/text = "1.20.1"
+popup/item_0/id = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ProjectSetup/VBoxContainer"]
 layout_mode = 2
