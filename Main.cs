@@ -29,17 +29,17 @@ public partial class Main : Control
         {
             GetTree().Quit();
         };
-        initPopup.FileCreateQueued += (filePath) =>
-        {
-            GD.Print("FileCreateQueued fired");
-            closeInitWindow();
-            // LoadedConfig = new Config();
-        };
         initPopup.FileOpenQueued += (filePath) =>
         {
             GD.Print("FileOpenQueued fired");
             closeInitWindow();
             LoadConfig(filePath);
+        };
+        initPopup.ProjectCreateQueued += (filepath, modspath) =>
+        {
+            GD.Print("ProjectCreateQueued fired");
+            closeInitWindow();
+            CreateProject(filepath, modspath);
         };
         this.AddChild(initPopup);
     }
@@ -49,6 +49,12 @@ public partial class Main : Control
     private void closeInitWindow()
     {
         initPopup.Hide();
+    }
+    private void CreateProject(string savePath, string modsFolder)
+    {
+        LoadingDialog loaderPopup = new LoadingDialog();
+        this.AddChild(loaderPopup);
+        loaderPopup.Show();
     }
 
     public void LoadConfig(string filePath)
